@@ -13,7 +13,7 @@ Two lesser powers:
 - Optional: **Magelight UI 1.3.0 or newer** (SeverActions installs it too). With it, the choice is one
   page; without it, two message boxes.
 - Optional: **SkyrimNet 0.25 or newer**. With it, the people around you notice. See [SkyrimNet](#skyrimnet).
-- Recommended: **YASTM** (Yet Another Soul Trap Manager). See [Souls](#souls).
+- Recommended: **YASTM** (Yet Another Soul Trap Manager) by Seally25. See [Souls](#souls).
 
 SkyrimNet isn't required, and there's no DLL. The plugin is ESL-flagged and uses header version 1.70, so it loads on SE 1.5.97
 as well as AE.
@@ -125,6 +125,6 @@ holds the Magelight header it compiles against, which it never ships.
 
 ## Credits
 
-By whyregister. Magelight UI by Severause (MIT). YASTM by its authors.
+By whyregister. Magelight UI by Severause (MIT). YASTM (Yet Another Soul Trap Manager) by Seally25.
 
 MIT licensed.
