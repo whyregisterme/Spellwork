@@ -1,0 +1,107 @@
+{
+  "FormKey": "000800:Spellwork.esp",
+  "EditorID": "SW_Quest",
+  "VirtualMachineAdapter": {
+    "Scripts": [
+      {
+        "Name": "SW_Main",
+        "Properties": [
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "AzurasStar",
+            "Object": "063B27:Skyrim.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "BlackStar",
+            "Object": "063B29:Skyrim.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "GameHour",
+            "Object": "000038:Skyrim.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "ReusableSoulGem",
+            "Object": "0ED2F1:Skyrim.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "SchoolMsg",
+            "Object": "000801:Spellwork.esp"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "SoulMsg",
+            "Object": "000802:Spellwork.esp"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "SoulStudyPower",
+            "Object": "000805:Spellwork.esp"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "UseMagelight",
+            "Object": "000803:Spellwork.esp"
+          }
+        ]
+      },
+      {
+        "Name": "SW_Ward",
+        "Properties": [
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "WardBase",
+            "Object": "000808:Spellwork.esp"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "WardPower",
+            "Object": "000807:Spellwork.esp"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "WardShader",
+            "Object": "03B6CB:Skyrim.esm"
+          }
+        ]
+      }
+    ],
+    "FileName": "",
+    "Aliases": [
+      {
+        "Property": {
+          "Name": "",
+          "Object": "000800:Spellwork.esp",
+          "Alias": 0
+        },
+        "Scripts": [
+          {
+            "Name": "SW_PlayerAlias"
+          }
+        ]
+      }
+    ]
+  },
+  "Name": {
+    "TargetLanguage": "English",
+    "Value": "Spellwork"
+  },
+  "Flags": [
+    "StartGameEnabled"
+  ],
+  "Priority": 50,
+  "NextAliasID": 1,
+  "Aliases": [
+    {
+      "Name": "PlayerAlias",
+      "Flags": [
+        "AllowReuseInQuest"
+      ],
+      "UniqueActor": "000007:Skyrim.esm",
+      "VoiceTypes": "Null"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "FormKey": "000805:Spellwork.esp",
+  "EditorID": "SW_SoulStudyPower",
+  "Name": {
+    "TargetLanguage": "English",
+    "Value": "Soul Study"
+  },
+  "EquipmentType": "025BEE:Skyrim.esm",
+  "Description": {
+    "TargetLanguage": "English",
+    "Value": "Spend a soul to study a school of magic for two hours, raising it one level. Five studies per level."
+  },
+  "Type": "LesserPower",
+  "CastType": "FireAndForget",
+  "Effects": [
+    {
+      "BaseEffect": "000804:Spellwork.esp",
+      "Data": {}
+    }
+  ]
+}

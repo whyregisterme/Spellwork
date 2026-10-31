@@ -1,0 +1,22 @@
+# Soul Study raised a school: SW_Main.Study sends Spellwork_Studied (strArg the school, numArg the new
+# level) after the fade. Narrated, so the people who waited out the two hours perceive and remember it.
+name: sw_studied
+description: "Narrate the player finishing a Soul Study"
+
+eventCriteria:
+  eventType: "mod_event"
+  schemaConditions:
+    - fieldPath: "event_name"
+      operator: "equals"
+      value: "Spellwork_Studied"
+
+response:
+  type: "direct_narration"
+  content: "*{{ player.name }} rises from two hours of quiet study, a spent soul gem gone dark beside them, with a firmer grasp of {{ event_json.str_arg }} magic.*"
+
+audience: "nearby_npcs"
+
+enabled: true
+probability: 1.0
+cooldownSeconds: 10
+priority: 1

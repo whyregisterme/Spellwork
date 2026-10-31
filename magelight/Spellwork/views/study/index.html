@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Spellwork</title>
+<!--
+  Soul Study for Spellwork, on Magelight UI.
+  SW_Main (through SW_UI) calls window.swStudy(json), then shows the view; the buttons answer through
+  window.swChoice("<school>:<soul size>" or "cancel"), which the script registered as a listener.
+  The page only offers what SW_Main would accept; SW_Main checks again anyway.
+  Fonts are the ones Windows ships, as SeverActions does, so nothing is bundled.
+-->
+<style>
+  :root {
+    --ink: #ece6da;
+    --ink-strong: #f4efe5;
+    --ink-soft: #b3ab9d;
+    --ink-faint: #9b9486;
+    --ink-off: #8a8376;
+    --card: #1c1a17;
+    --well: #2c2822;
+    --line: #3a342b;
+    --edge: #4a4236;
+    --edge-strong: #5a5143;
+    --bar: #7d7466;
+    --accent: #b98b6e;
+    --serif: "Sitka Text", Cambria, "Palatino Linotype", Georgia, serif;
+    --serif-hero: "Sitka Banner", "Sitka Display", Cambria, "Palatino Linotype", Georgia, serif;
+    --sans: "Segoe UI", system-ui, sans-serif;
+  }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: rgba(10, 9, 8, 0.55);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); color: var(--ink);
+  }
+  .card {
+    display: none; box-sizing: border-box; width: 640px; max-width: calc(100vw - 48px);
+    padding: 36px 44px 32px; background: var(--card); border: 1px solid var(--edge); border-radius: 4px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+    flex-direction: column; gap: 18px;
+  }
+  .card.on { display: flex; }
+  .head { display: flex; flex-direction: column; gap: 8px; }
+  .kicker { margin: 0; font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: 0.22em; color: var(--accent); }
+  h1 { margin: 0; font-family: var(--serif-hero); font-size: 28px; font-weight: 400; line-height: 1.25; color: var(--ink-strong); }
+  .meta { margin: 0; font-size: 16px; line-height: 1.4; color: var(--ink-soft); }
+  .label { margin: 0; font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: 0.12em; color: var(--ink-soft); }
+  .list { display: flex; flex-direction: column; gap: 4px; }
+  .rule { height: 1px; background: var(--line); }
+  button {
+    font-family: var(--sans); font-size: 15px; letter-spacing: 0.02em; cursor: pointer;
+    background: transparent; color: var(--ink); border: 1px solid var(--edge-strong); border-radius: 3px;
+  }
+  button:focus { outline: 2px solid var(--ink-strong); outline-offset: 2px; }
+  button:disabled { cursor: default; }
+  .pick {
+    display: flex; align-items: center; gap: 16px; height: 44px; padding: 0 14px; text-align: left;
+    font-family: var(--serif); font-size: 17px; border-color: transparent;
+  }
+  .pick:hover:not(:disabled) { border-color: var(--edge-strong); }
+  .pick.on { background: var(--well); border-color: var(--accent); }
+  .pick:disabled { color: var(--ink-off); }
+  .name { flex: 1 1 auto; }
+  .num { font-family: var(--sans); font-size: 14px; color: var(--ink-soft); text-align: right; }
+  .pick:disabled .num { color: var(--ink-off); }
+  .school .name { flex: 0 0 140px; }
+  .school .num { width: 34px; }
+  .bar { flex: 1 1 auto; height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+  .bar span { display: block; height: 100%; background: var(--bar); }
+  .pick.on .bar span { background: var(--accent); }
+  .soul .reach { width: 110px; }
+  .soul .count { width: 50px; }
+  .foot { display: flex; justify-content: space-between; gap: 16px; font-family: var(--sans); font-size: 14px; color: var(--ink-soft); }
+  .row { display: flex; gap: 10px; }
+  .row button { height: 48px; }
+  button.primary { flex: 2 1 0; border: none; background: var(--accent); color: var(--card); font-size: 16px; font-weight: 600; }
+  button.primary:hover:not(:disabled) { background: #c99d80; }
+  button.primary:disabled { background: var(--line); color: var(--ink-faint); }
+  button.away { flex: 1 1 0; }
+  button.away:hover { border-color: var(--accent); }
+  .hint { margin: 0; min-height: 20px; font-size: 15px; color: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<section class="card" id="study" aria-labelledby="studyTitle">
+  <div class="head">
+    <p class="kicker">SPELLWORK · SOUL STUDY</p>
+    <h1 id="studyTitle">Spend a soul to study</h1>
+    <p class="meta">One study raises a school one level, as a trainer would. A soul can only teach so far: the greater the soul, the further.</p>
+  </div>
+  <p class="label" id="schoolLabel">SCHOOL</p>
+  <div class="list" id="schools" role="group" aria-labelledby="schoolLabel"></div>
+  <p class="label" id="soulLabel">SOUL</p>
+  <div class="list" id="souls" role="group" aria-labelledby="soulLabel"></div>
+  <div class="rule" aria-hidden="true"></div>
+  <div class="foot"><span id="sessions"></span><span id="hours"></span></div>
+  <p class="hint" id="hint" aria-live="polite"></p>
+  <div class="row">
+    <button type="button" class="primary" id="go" data-ml-sound="ok">Study</button>
+    <button type="button" class="away" id="away" data-ml-sound="cancel">Put it away</button>
+  </div>
+</section>
+
+<script>
+(function () {
+  var data = null, school = '', soul = 0, answered = false;
+
+  function parse(arg) {
+    if (typeof arg === 'string') {
+      try { return JSON.parse(arg); } catch (e) { return {}; }
+    }
+    return arg || {};
+  }
+  function el(tag, cls, txt) {
+    var e = document.createElement(tag);
+    if (cls) { e.className = cls; }
+    if (txt !== undefined) { e.textContent = txt; }
+    return e;
+  }
+  function find(list, key, value) {
+    for (var i = 0; i < list.length; i++) { if (list[i][key] === value) { return list[i]; } }
+    return null;
+  }
+  function level() { var s = find(data.schools || [], 'name', school); return s ? s.level : 0; }
+  // Why this soul can't be spent on the chosen school, or '' when it can.
+  function soulBlock(s) {
+    if (!s.count) { return 'You have no ' + s.name + ' souls.'; }
+    if (level() >= data.maxLevel) { return school + ' is at ' + level() + '. Past ' + data.maxLevel + ', only practice teaches.'; }
+    if (level() >= s.cap) { return 'A ' + s.name + ' soul can’t teach ' + school + ' past ' + s.cap + '.'; }
+    return '';
+  }
+
+  function render() {
+    var schools = document.getElementById('schools');
+    schools.textContent = '';
+    (data.schools || []).forEach(function (s) {
+      var b = el('button', 'pick school' + (s.name === school ? ' on' : ''));
+      b.type = 'button';
+      b.setAttribute('aria-pressed', s.name === school ? 'true' : 'false');
+      b.appendChild(el('span', 'name', s.name));
+      b.appendChild(el('span', 'num', String(s.level)));
+      var bar = el('span', 'bar');
+      bar.setAttribute('aria-hidden', 'true');
+      var fill = el('span');
+      fill.style.width = Math.max(0, Math.min(1, Number(s.pct) || 0)) * 100 + '%';
+      bar.appendChild(fill);
+      b.appendChild(bar);
+      b.addEventListener('click', function () {
+        school = s.name;
+        var cur = find(data.souls || [], 'size', soul);
+        if (cur && soulBlock(cur)) { soul = 0; }
+        render();
+        var on = document.querySelector('.school.on');
+        if (on) { on.focus(); }
+      });
+      schools.appendChild(b);
+    });
+
+    var souls = document.getElementById('souls');
+    souls.textContent = '';
+    (data.souls || []).forEach(function (s) {
+      var blocked = school ? soulBlock(s) : (s.count ? '' : 'none');
+      var b = el('button', 'pick soul' + (s.size === soul ? ' on' : ''));
+      b.type = 'button';
+      b.disabled = !!blocked;
+      b.setAttribute('aria-pressed', s.size === soul ? 'true' : 'false');
+      if (blocked) { b.title = blocked; }
+      var name = s.name.charAt(0).toUpperCase() + s.name.slice(1) + ' soul';
+      b.appendChild(el('span', 'name', name));
+      b.appendChild(el('span', 'num reach', s.count && school && level() >= s.cap ? 'too weak' : 'teaches to ' + s.cap));
+      b.appendChild(el('span', 'num count', '× ' + s.count));
+      b.addEventListener('click', function () {
+        soul = s.size;
+        render();
+        var on = document.querySelector('.soul.on');
+        if (on) { on.focus(); }
+      });
+      souls.appendChild(b);
+    });
+
+    document.getElementById('sessions').textContent =
+      'Studied ' + data.used + ' of ' + data.max + ' times this level';
+    document.getElementById('hours').textContent = data.hours + ' hours pass';
+
+    var go = document.getElementById('go');
+    var hint = '';
+    var cur = find(data.souls || [], 'size', soul);
+    if (!school) { hint = 'Choose a school.'; }
+    else if (!cur) { hint = 'Choose a soul to spend.'; }
+    else if (soulBlock(cur)) { hint = soulBlock(cur); }
+    go.disabled = hint !== '';
+    go.textContent = hint ? 'Study' : 'Study ' + school + ' with a ' + cur.name + ' soul';
+    document.getElementById('hint').textContent = hint;
+  }
+
+  function answer(choice) {
+    if (answered) { return; }
+    answered = true;
+    document.getElementById('study').classList.remove('on');
+    if (typeof window.swChoice === 'function') { window.swChoice(choice); }
+  }
+
+  // {schools:[{name,level,pct}], souls:[{size,name,count,cap}], used, max, hours, maxLevel}
+  window.swStudy = function (arg) {
+    data = parse(arg);
+    answered = false;
+    school = '';
+    soul = 0;
+    render();
+    document.getElementById('study').classList.add('on');
+    var first = document.querySelector('.school');
+    if (first) { first.focus(); }
+  };
+
+  document.getElementById('go').addEventListener('click', function () {
+    if (!this.disabled) { answer(school + ':' + soul); }
+  });
+  document.getElementById('away').addEventListener('click', function () { answer('cancel'); });
+
+  // Keys are handled here rather than trusted to the engine: Ultralight has skipped DOM events before.
+  // Enter presses the focused button; Escape puts it away. Magelight may also leave UI mode on Escape;
+  // SW_Main counts only the first answer.
+  document.addEventListener('keydown', function (e) {
+    if (!document.querySelector('.card.on')) { return; }
+    if (e.key === 'Enter' || e.keyCode === 13) {
+      var f = document.activeElement;
+      if (f && f.tagName === 'BUTTON' && !f.disabled) {
+        e.preventDefault();
+        f.click();
+      }
+    } else if (e.key === 'Escape' || e.keyCode === 27) {
+      e.preventDefault();
+      answer('cancel');
+    }
+  });
+})();
+</script>
+</body>
+</html>

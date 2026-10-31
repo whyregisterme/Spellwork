@@ -1,0 +1,25 @@
+# The practice ward ran its course: SW_Ward.Finish sends Spellwork_WardGone with strArg "expired", and
+# only while the player is near enough to see it. Moving the ward sends nothing.
+name: sw_ward_expired
+description: "Narrate the player's practice ward fading when its time runs out"
+
+eventCriteria:
+  eventType: "mod_event"
+  schemaConditions:
+    - fieldPath: "event_name"
+      operator: "equals"
+      value: "Spellwork_WardGone"
+    - fieldPath: "str_arg"
+      operator: "equals"
+      value: "expired"
+
+response:
+  type: "direct_narration"
+  content: "*{{ player.name }}'s conjured practice dummy flickers, thins to a shimmer, and fades away.*"
+
+audience: "nearby_npcs"
+
+enabled: true
+probability: 1.0
+cooldownSeconds: 60
+priority: 1

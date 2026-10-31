@@ -1,0 +1,21 @@
+{
+  "FormKey": "000802:Spellwork.esp",
+  "EditorID": "SW_SoulMsg",
+  "Description": {
+    "TargetLanguage": "English",
+    "Value": "Which soul will you spend?\n\nYou hold: petty %.0f, lesser %.0f, common %.0f, greater %.0f, grand %.0f.\nA petty soul teaches a school up to 25, lesser 40, common 50, greater 75, grand 90."
+  },
+  "INAM": "0x00000000",
+  "Quest": "000800:Spellwork.esp",
+  "Flags": [
+    "MessageBox"
+  ],
+  "MenuButtons": [
+    { "Text": { "TargetLanguage": "English", "Value": "Petty" } },
+    { "Text": { "TargetLanguage": "English", "Value": "Lesser" } },
+    { "Text": { "TargetLanguage": "English", "Value": "Common" } },
+    { "Text": { "TargetLanguage": "English", "Value": "Greater" } },
+    { "Text": { "TargetLanguage": "English", "Value": "Grand" } },
+    { "Text": { "TargetLanguage": "English", "Value": "Put it away" } }
+  ]
+}

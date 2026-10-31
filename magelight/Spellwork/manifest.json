@@ -1,0 +1,15 @@
+{
+  "modId": "Spellwork",
+  "name": "Spellwork",
+  "version": "0.1.8",
+  "minHost": "1.3.0",
+  "views": {
+    "sw_study": {
+      "path": "views/study/index.html",
+      "layer": "popup",
+      "fullscreen": true,
+      "startVisible": false,
+      "sounds": { "open": "open", "close": "close" }
+    }
+  }
+}

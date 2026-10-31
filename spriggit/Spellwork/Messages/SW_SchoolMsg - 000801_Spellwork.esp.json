@@ -1,0 +1,21 @@
+{
+  "FormKey": "000801:Spellwork.esp",
+  "EditorID": "SW_SchoolMsg",
+  "Description": {
+    "TargetLanguage": "English",
+    "Value": "Soul Study: spend a soul to raise a school one level. Two hours pass.\n\nAlteration %.0f, Conjuration %.0f, Destruction %.0f, Illusion %.0f, Restoration %.0f.\nStudied %.0f of %.0f times this level.\n\nWhich school?"
+  },
+  "INAM": "0x00000000",
+  "Quest": "000800:Spellwork.esp",
+  "Flags": [
+    "MessageBox"
+  ],
+  "MenuButtons": [
+    { "Text": { "TargetLanguage": "English", "Value": "Alteration" } },
+    { "Text": { "TargetLanguage": "English", "Value": "Conjuration" } },
+    { "Text": { "TargetLanguage": "English", "Value": "Destruction" } },
+    { "Text": { "TargetLanguage": "English", "Value": "Illusion" } },
+    { "Text": { "TargetLanguage": "English", "Value": "Restoration" } },
+    { "Text": { "TargetLanguage": "English", "Value": "Put it away" } }
+  ]
+}

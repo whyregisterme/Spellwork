@@ -1,0 +1,22 @@
+# Practice Ward conjured its dummy: SW_Ward.Conjure sends Spellwork_WardConjured. Narrated so people
+# nearby see a mage begin drilling; the cooldown keeps a moved or renewed ward from repeating it.
+name: sw_ward_conjured
+description: "Narrate the player conjuring a practice ward"
+
+eventCriteria:
+  eventType: "mod_event"
+  schemaConditions:
+    - fieldPath: "event_name"
+      operator: "equals"
+      value: "Spellwork_WardConjured"
+
+response:
+  type: "direct_narration"
+  content: "*With a sweep of {{ player.name }}'s hand, a translucent practice dummy shimmers into being nearby: a conjured target to drill spells against.*"
+
+audience: "nearby_npcs"
+
+enabled: true
+probability: 1.0
+cooldownSeconds: 300
+priority: 1

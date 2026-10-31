@@ -1,0 +1,40 @@
+{
+  "FormKey": "000804:Spellwork.esp",
+  "EditorID": "SW_SoulStudyEffect",
+  "VirtualMachineAdapter": {
+    "Scripts": [
+      {
+        "Name": "SW_SoulStudyEffect",
+        "Properties": [
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "MainQuest",
+            "Object": "000800:Spellwork.esp"
+          }
+        ]
+      }
+    ]
+  },
+  "Name": {
+    "TargetLanguage": "English",
+    "Value": "Soul Study"
+  },
+  "Flags": [
+    "NoDuration",
+    "NoMagnitude",
+    "NoArea",
+    "HideInUI"
+  ],
+  "Archetype": {
+    "MutagenObjectType": "MagicEffectArchetype",
+    "Type": "Script"
+  },
+  "CastType": "FireAndForget",
+  "DualCastScale": 1.0,
+  "CastingSoundLevel": "Normal",
+  "Sounds": [],
+  "Description": {
+    "TargetLanguage": "English",
+    "Value": ""
+  }
+}

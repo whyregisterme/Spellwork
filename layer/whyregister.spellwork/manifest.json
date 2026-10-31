@@ -1,0 +1,21 @@
+{
+  "id": "whyregister.spellwork",
+  "type": "bundle",
+  "title": "Spellwork",
+  "tagline": "The people around you notice when you study a school of magic or conjure a practice ward.",
+  "description": "Spellwork trains the five schools of magic: Soul Study spends a soul to raise a school one level, and Practice Ward conjures a dummy that makes school spells cast near it teach more. This layer narrates both, so everyone nearby perceives and remembers it, and may remark on it.\n\nNo scripts and no plugin of its own: it listens for the mod events Spellwork sends.\n\n**Requires:** Spellwork.esp (shipped with this mod).",
+  "author": "whyregister",
+  "tags": [
+    "immersion"
+  ],
+  "nsfw": false,
+  "mods": [
+    {
+      "name": "Spellwork",
+      "file": "Spellwork.esp",
+      "required": true
+    }
+  ],
+  "version": "0.1.8",
+  "min_skyrimnet_version": "0.25.0"
+}

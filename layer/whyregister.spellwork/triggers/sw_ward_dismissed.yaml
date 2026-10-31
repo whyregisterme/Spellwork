@@ -1,0 +1,25 @@
+# The player dismissed the practice ward by activating it: SW_Ward.Finish sends Spellwork_WardGone
+# with strArg "dismissed".
+name: sw_ward_dismissed
+description: "Narrate the player dismissing their practice ward"
+
+eventCriteria:
+  eventType: "mod_event"
+  schemaConditions:
+    - fieldPath: "event_name"
+      operator: "equals"
+      value: "Spellwork_WardGone"
+    - fieldPath: "str_arg"
+      operator: "equals"
+      value: "dismissed"
+
+response:
+  type: "direct_narration"
+  content: "*At a touch from {{ player.name }}, the conjured practice dummy dissolves into motes of light.*"
+
+audience: "nearby_npcs"
+
+enabled: true
+probability: 1.0
+cooldownSeconds: 60
+priority: 1

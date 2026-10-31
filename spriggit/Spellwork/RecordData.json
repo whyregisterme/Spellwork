@@ -1,0 +1,25 @@
+{
+  "SpriggitSource": {
+    "PackageName": "Spriggit.Json.Skyrim",
+    "Version": "0.41"
+  },
+  "ModKey": "Spellwork.esp",
+  "GameRelease": "SkyrimSE",
+  "ModHeader": {
+    "Flags": [
+      "Small"
+    ],
+    "Author": "whyregister",
+    "Description": "Spellwork: train the schools of magic. Soul Study spends a soul to raise a school one level; Practice Ward conjures a dummy that makes school spells cast near it teach more.",
+    "MasterReferences": [
+      {
+        "Master": "Skyrim.esm",
+        "FileSize": 0
+      }
+    ],
+    "INTV": 1,
+    "Stats": {
+      "Version": 1.7
+    }
+  }
+}

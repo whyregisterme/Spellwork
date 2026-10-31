@@ -1,0 +1,34 @@
+{
+  "FormKey": "000808:Spellwork.esp",
+  "EditorID": "SW_PracticeWardDummy",
+  "VirtualMachineAdapter": {
+    "Scripts": [
+      {
+        "Name": "SW_WardDummy",
+        "Properties": [
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "WardQuest",
+            "Object": "000800:Spellwork.esp"
+          }
+        ]
+      }
+    ]
+  },
+  "ObjectBounds": {
+    "First": "-37, -23, -32",
+    "Second": "34, 5, 130"
+  },
+  "Name": {
+    "TargetLanguage": "English",
+    "Value": "Practice Ward"
+  },
+  "Model": {
+    "File": "Clutter\\PracticeDummy\\PracticeDummy01.nif"
+  },
+  "ActivateTextOverride": {
+    "TargetLanguage": "English",
+    "Value": "Dismiss"
+  },
+  "Flags": []
+}
