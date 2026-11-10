@@ -1,6 +1,6 @@
 # Spellwork
 
-Train the five schools of magic. **Alpha.**
+Train the five schools of magic.
 
 Two lesser powers:
 
