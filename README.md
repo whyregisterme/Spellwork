@@ -12,7 +12,8 @@ Two lesser powers:
 - SKSE
 - Optional: **Magelight UI 1.3.0 or newer** (SeverActions installs it too). With it, the choice is one
   page; without it, two message boxes.
-- Optional: **SkyrimNet 0.25 or newer**. With it, the people around you notice. See [SkyrimNet](#skyrimnet).
+- Optional: **[SkyrimNet](https://www.nexusmods.com/skyrimspecialedition/mods/198346)**, any 1.x release
+  (or beta 25 and later). With it, the people around you notice. See [SkyrimNet](#skyrimnet).
 - Recommended: **YASTM** (Yet Another Soul Trap Manager) by Seally25. See [Souls](#souls).
 
 SkyrimNet isn't required, and there's no DLL. The plugin is ESL-flagged and uses header version 1.70, so it loads on SE 1.5.97
